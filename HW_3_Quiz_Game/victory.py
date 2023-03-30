@@ -79,3 +79,5 @@ def quiz_game():
 
     else:
         print('\nБлагодарим за игру!')
+
+quiz_game()
