@@ -28,7 +28,50 @@
 Для реализации основного меню можно использовать пример ниже или написать свой
 """
 
+
+'''
+Лекция 7:
+ЗАДАНИЕ 1
+1. В подпрограмме Мой банковский счет;
+2. Добавить сохранение суммы счета в файл. 
+ 
+При первом открытии программы на счету 0
+После того как мы воспользовались программой и вышли сохранить сумму счета 
+При следующем открытии программы прочитать сумму счета, которую сохранили
+...
+3. Добавить сохранение истории покупок в файл
+ 
+При первом открытии программы истории нет.
+После того как мы что нибудь купили и закрыли программу сохранить историю покупок.
+При следующем открытии программы прочитать историю и новые покупки уже добавлять к ней;
+...
+4. Формат сохранения количество файлов и способ можно выбрать самостоятельно.
+'''
 def personal_account():
+    import os
+    import sys
+    import json
+
+    BALANCE_FILE_NAME = os.path.join(sys.path[0], 'balance.csv')
+    PURCHASE_HISTORY_FILE_NAME = os.path.join(sys.path[0], 'purchase_history.json')
+
+    balance = 0
+    purchase_history = {}
+
+    if os.path.exists(BALANCE_FILE_NAME):
+        with open(BALANCE_FILE_NAME, 'r') as f:
+            try:
+                balance = int(f.read())
+            except ValueError:
+                pass
+
+    if os.path.exists(PURCHASE_HISTORY_FILE_NAME):
+        with open(PURCHASE_HISTORY_FILE_NAME, 'r') as jf:
+            try:
+                purchase_history = json.load(jf)
+            except ValueError:
+                pass
+
     def print_lines():
         print('-' * 30)
 
@@ -37,8 +80,6 @@ def personal_account():
         while result != '':
             result = input('Для продолжения нажмите "Ввод"!')
 
-    balance = 0
-    purchase_history = {}
 
     while True:
         print(f'\nТекущий баланс: {balance}\n')
@@ -78,7 +119,12 @@ def personal_account():
             print_lines()
             continuation()
         elif choice == '4':
+            with open(BALANCE_FILE_NAME, 'w') as f:
+                f.write(str(balance))
+            with open(PURCHASE_HISTORY_FILE_NAME, 'w') as jf:
+                json.dump(purchase_history, jf)
             break
         else:
             print('Неверный пункт меню')
 
+# personal_account()
