@@ -1,0 +1,2 @@
+Files: 4.txt, balance.csv, C2-4.txt, C4.txt, console_file_manager.py, LICENSE, listdir.txt, purchase_history.json, sandbox.py, test_filemanager.py, test_python.py
+Dirs: .git, .idea, .pytest_cache, 1, 2, 4, 5, 6, C2, C4, HW_3_Quiz_Game, HW_4_Personal_Account, T1, __pycache__
